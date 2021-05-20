@@ -38,9 +38,9 @@
 
         const onCheckBoxChanged = (e) => {
           console.log('event2', e);
-          console.log('event2 todoId', e.dataset['todoid']);
+          const todoId = e.dataset['todoid'];
           const newCompleted = e.checked;
-          fetch('todos/' + todoId + 'set-completed', {
+          fetch('todos/' + todoId + '/set-completed', {
             method: 'POST',
             body: JSON.stringify({
               'completed': newCompleted
@@ -48,6 +48,12 @@
             headers: {
               'Content-Type': 'application/json'
             }
+          })
+          .then(jsonResponse => {
+            document.getElementById('error').className = 'hidden';
+          })
+          .catch(function() {
+            document.getElementById('error').className = '';
           })
         };
 
